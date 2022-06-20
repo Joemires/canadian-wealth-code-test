@@ -2,7 +2,7 @@
     <x-slot name="header" class="bg-gradient-primary">
 
         @php
-            $transactions = $users->sum( $user->transactions->sum('amount'));
+            $transactions = $users->sum( fn ($user) => $user->transactions->sum('amount'));
             // dd($transactions);
         @endphp
         <!-- Card stats -->
