@@ -1,6 +1,14 @@
 <?php
 
+
 use Illuminate\Support\Str;
+
+$url = collect(parse_url(getenv("DATABASE_URL")));
+
+$host = $url->get("host");
+$username = $url->get("user");
+$password = $url->get("pass");
+$database = substr($url->get("path"), 1);
 
 return [
 
@@ -92,6 +100,17 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
+
+        'heroku_pgsql' => array(
+            'driver'   => 'pgsql',
+            'host'     => $host,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
+        ),
 
     ],
 
