@@ -2,7 +2,7 @@
     <x-slot name="header" class="bg-gradient-primary">
 
         @php
-            $transactions = $users->where( fn ($user) => $user->transactions->count() > 0)->transactions->sum( fn ($transaction) => $transaction->amount);
+            $transactions = $users->where( fn ($user) => $user->transactions->count() > 0)->pluck('transactions')->sum( fn ($transaction) => $transaction->amount);
             // dd($transactions);
         @endphp
         <!-- Card stats -->
