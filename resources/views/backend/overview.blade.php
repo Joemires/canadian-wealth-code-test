@@ -88,9 +88,11 @@
                                     user_id: {{ auth()->user()->id }}
                                 },
                                 callback: function(response) {
+                                    Notiflix.Loading.circle()
                                     // let message = 'Payment complete! Reference: ' + response.reference;
                                     // console.log(message);
                                     $.post("{{ route('backend.premium') }}", {reference: response.reference}, (data) => {
+                                        Notiflix.Loading.remove()
                                         if(! data.error) {
                                             Notiflix.Report.success("Upgrade Successful", "🎉 Hurray, we have received your upgrade request and have acted on it ASAP. Welcome to a premium experience 😏", null, () => {
                                                 window.location.reload()
@@ -100,6 +102,7 @@
                                         }
                                     })
                                     .failure( () => {
+                                        Notiflix.Loading.remove()
                                         Notiflix.Report.failure("Oops... Our Bad", "We are sorry but our server could not process this request, It's our fault and we are working on a quick fix. Please hold on.")
                                     })
                                     // alert(message);
