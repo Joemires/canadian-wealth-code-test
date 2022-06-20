@@ -12,12 +12,7 @@ class PanelController extends Controller
     {
         if(optional(auth()->user())->hasRole('admin')) return redirect()->route('backend.users.index');
 
-        $request->user()->transactions()->create([
-            'amount' => 500,
-            'reference' => 'xyz-123456'
-        ]);
         return view('backend.overview');
-
     }
 
     public function premium(Request $request)
